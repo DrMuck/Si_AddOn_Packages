@@ -10,7 +10,7 @@ Download the latest from the [Releases](https://github.com/DrMuck/Si_AddOn_Packa
 
 | Package | Contents | Purpose |
 |--|--|--|
-| **Balance_Package.zip** | `Si_UnitBalance.dll`, `Si_MapBalance.dll` | Live unit-balance overlay (HP, cost, damage, range, speed) + per-map spawn / resource layouts. The recommended base layer for any custom Silica server |
+| **Balance_Package.zip** | `Si_UnitBalance.dll`, `Si_MapBalance.dll`, `Si_StarterUnits.dll` | Live unit-balance overlay (HP, cost, damage, range, speed) + per-map spawn / resource layouts + per-faction starter unit spawns. The recommended base layer for any custom Silica server. All three mods have **browser-based interactive config tools** linked from the package's `INSTALL.md` |
 | **SuperWeapon_Package.zip** | `Si_CrabCannon.dll`, `Si_HeavyTeleporter.dll` + `cannon_boom.wav` | Alien long-range ballistic cannon + human vehicle teleport. Two big-impact tactical tools |
 | **KoH_Package.zip** | `Si_KingOfTheHill.dll` + full sound library + manuals | "King of the Galactic Teleport" capture-the-hill game mode with `/buy` credit economy, headhunter bounties, intro voice-over, etc. **Requires Balance_Package** for `Si_MapBalance` (KoH consumes per-map spawn data from MapBalance) |
 | **Replay_Package.zip** | `Si_ReplayLogging.dll` + the Silica-MapReplay Python tool | Server-side replay recorder (binary `.srpl`) + Python pipeline to render finished games as MP4 videos. Independent of the other packages |
@@ -26,7 +26,9 @@ Each package includes an `INSTALL.md` with prerequisites, install steps, chat-co
 | Si_CrabCannon | https://github.com/DrMuck/Si_CrabCannon |
 | Si_UnitBalance + UI | https://github.com/DrMuck/Silica-UnitBalance |
 | Si_MapBalance | https://github.com/DrMuck/Silica-MapBalance |
-| Si_MapBalance Tool | https://github.com/DrMuck/Silica-MapBalanceTool |
+| Si_MapBalance Tool | https://github.com/DrMuck/Silica-MapBalanceTool — try it at <https://drmuck.github.io/Silica-MapBalanceTool/> |
+| Si_UnitBalance Tool | <https://drmuck.github.io/Si_UnitBalance_Interactive/> ([source](https://github.com/DrMuck/Si_UnitBalance_Interactive)) |
+| Si_StarterUnits | https://github.com/DrMuck/Si_StarterUnits — tool at <https://drmuck.github.io/Si_StarterUnits/> |
 | Si_ReplayLogging | https://github.com/DrMuck/Silica-ReplayLogging |
 | Silica-MapReplay | https://github.com/DrMuck/Silica-MapReplay |
 
