@@ -1,0 +1,12 @@
+{
+  "DefaultAmount": 1000,
+  "AnnounceOnConnect": true,
+  "BroadcastOnKill": true,
+  "Bounties": {
+    "76561190000000000": {
+      "Name": "ExamplePlayer",
+      "Amount": 1500,
+      "Note": "remove this entry and add real targets"
+    }
+  }
+}

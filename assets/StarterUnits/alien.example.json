@@ -1,0 +1,6 @@
+{
+  "units": [
+    { "name": "Crab",     "count": 4 },
+    { "name": "Hunter",   "count": 2 }
+  ]
+}

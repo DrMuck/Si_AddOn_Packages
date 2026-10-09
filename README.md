@@ -13,7 +13,7 @@ Download the latest from the [Releases](https://github.com/DrMuck/Si_AddOn_Packa
 | **Balance_Package.zip** | `Si_UnitBalance.dll`, `Si_MapBalance.dll`, `Si_StarterUnits.dll` | Live unit-balance overlay (HP, cost, damage, range, speed) + per-map spawn / resource layouts + per-faction starter unit spawns. The recommended base layer for any custom Silica server. All three mods have **browser-based interactive config tools** linked from the package's `INSTALL.md` |
 | **SuperWeapon_Package.zip** | `Si_CrabCannon.dll`, `Si_HeavyTeleporter.dll` + `cannon_boom.wav` | Alien long-range ballistic cannon + human vehicle teleport. Two big-impact tactical tools |
 | **KoH_Package.zip** | `Si_KingOfTheHill.dll` + full sound library + manuals | "King of the Galactic Teleport" capture-the-hill game mode with `/buy` credit economy, headhunter bounties, intro voice-over, etc. **Requires Balance_Package** for `Si_MapBalance` (KoH consumes per-map spawn data from MapBalance) |
-| **Replay_Package.zip** | `Si_ReplayLogging.dll` + the Silica-MapReplay Python tool | Server-side replay recorder (binary `.srpl`) + Python pipeline to render finished games as MP4 videos. Independent of the other packages |
+| **Replay_Package.zip** | `Si_ReplayLogging.dll` + the complete `Mod MapReplay/` service folder incl. `assets.pak` (~110 MB) | Server-side replay recorder (binary `.srpl`) + the MapReplay live service that renders every finished round as an MP4 (map view, killbar, graphs, stats, chat; optional Discord upload). Drop `Mod MapReplay/` next to `Mods/`, run the launcher. Independent of the other packages |
 
 Each package includes an `INSTALL.md` with prerequisites, install steps, chat-command quick reference, and configuration notes.
 
@@ -35,6 +35,17 @@ Each package includes an `INSTALL.md` with prerequisites, install steps, chat-co
 ## Documentation
 
 The KoH package ships full **Admin** and **Player** chat-command manuals (PDF + Markdown) covering all four DrMuck server mods. They're also available standalone in [Si_KingOfTheHill](https://github.com/DrMuck/Si_KingOfTheHill).
+
+## Building the packages
+
+Everything needed to rebuild the ZIPs is in this repo: `build_packages.py`, the static assets under `assets/` (KoH sound library, StarterUnits example configs, bounty example) and the per-package `INSTALL.md` under `packages/`. The script expects the mod repos checked out as siblings of this one and takes each DLL from its `bin/Release/netstandard2.1` folder, and the MapReplay tool from the `Silica-MapReplay` checkout (git-tracked files only).
+
+```
+python build_packages.py          # -> dist/*_Package.zip
+gh release create vX.Y.Z dist/*.zip --title "..." --notes-file notes.md
+```
+
+Current release: built from Silica **Beta 0.9.47** assemblies. The game version a mod was built against matters only when the game changes its API; check the MelonLoader log after a game update.
 
 ## License
 
