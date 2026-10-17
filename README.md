@@ -50,3 +50,7 @@ Current release: built from Silica **Beta 0.9.47** assemblies. The game version 
 ## License
 
 Each individual mod carries its own license (GPL-3.0 across the board). This packages-repo is just a distribution channel — no additional licensing applied.
+
+## Buy_Package (since v2.2.0)
+
+`Si_Buy.dll` + example config + bounty example — the `/buy` credit economy carved out of Si_KingOfTheHill 0.5.0 ([Si_Buy](https://github.com/DrMuck/Si_Buy)). Install next to the KoH package, or alone.

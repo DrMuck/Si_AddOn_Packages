@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build the four Si_AddOn_Packages release ZIPs from the sibling mod repos.
+"""Build the five Si_AddOn_Packages release ZIPs from the sibling mod repos.
 
 Run from a checkout that sits next to the mod repos (see PROJECTS). Each mod's
 Release DLL is taken from its bin/Release/netstandard2.1 folder, so build the
 mods first. Static assets (sounds, example configs) and the INSTALL docs live
 in this repo under assets/ and packages/. Output goes to dist/.
 
-    python build_packages.py            # build all four
+    python build_packages.py            # build all five
     python build_packages.py Replay     # build one
 """
 import os
@@ -76,14 +76,21 @@ def build_koh(zf):
     zf.write(dll("Si_KingOfTheHill", "Si_KingOfTheHill"), "Mods/Si_KingOfTheHill.dll")
     zf.write(koh / "Si_KingOfTheHill_Config.example.json",
              "UserData/KingOfTheHill_cfg/Si_KingOfTheHill_Config.example.json")
-    zf.write(ASSETS / "KingOfTheHill_cfg" / "Bounties.example.json",
-             "UserData/KingOfTheHill_cfg/Bounties.example.json")
     for f in sorted((ASSETS / "sounds").glob("*.wav")):
         zf.write(f, f"UserData/sounds/{f.name}")
     for m in ("ADMIN_MANUAL", "PLAYER_MANUAL"):
         zf.write(koh / f"{m}.pdf", f"{m}.pdf")
         zf.write(koh / f"{m}.md", f"{m}.md")
     zf.write(DOCS / "KoH" / "INSTALL.md", "INSTALL.md")
+
+
+def build_buy(zf):
+    # The /buy credit economy, carved out of Si_KingOfTheHill in KGT 0.5.0.
+    buy = PROJECTS / "Si_Buy"
+    zf.write(dll("Si_Buy", "Si_Buy"), "Mods/Si_Buy.dll")
+    zf.write(buy / "Si_Buy_Config.example.json", "UserData/Buy_cfg/Si_Buy_Config.example.json")
+    zf.write(ASSETS / "KingOfTheHill_cfg" / "Bounties.example.json", "UserData/Buy_cfg/Bounties.example.json")
+    zf.write(DOCS / "Buy" / "INSTALL.md", "INSTALL.md")
 
 
 def build_replay(zf):
@@ -101,6 +108,7 @@ PACKAGES = {
     "Balance": build_balance,
     "SuperWeapon": build_superweapon,
     "KoH": build_koh,
+    "Buy": build_buy,
     "Replay": build_replay,
 }
 
