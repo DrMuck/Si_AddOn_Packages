@@ -22,13 +22,13 @@ Mods/Si_StarterUnits.dll
 ```
 
 Default config files are auto-created on first run:
-- `UserData/UnitBalance_cfg/Si_UnitBalance_Config.json`
+- `UserData/cfg/UnitBalance/Si_UnitBalance_Config.json`
 - `UserData/MapBalance_cfg/Si_MapBalance_Config.json`
-- `UserData/StarterUnits/` (folder created — drop per-faction JSONs here)
+- `UserData/cfg/StarterUnits/` (folder created — drop per-faction JSONs here)
 
-The package also ships three example StarterUnits configs under `UserData/StarterUnits/` (rename `*.example.json` → `*.json` and edit, or replace entirely).
+The package also ships three example StarterUnits configs under `UserData/cfg/StarterUnits/` (rename `*.example.json` → `*.json` and edit, or replace entirely).
 
-For Si_MapBalance to do anything, place per-map layout JSONs in `UserData/Spawns/<MapName>/`. Use the Map Balance Tool to author them.
+For Si_MapBalance to do anything, place per-map layout JSONs in `UserData/cfg/Spawns/<MapName>/`. Use the Map Balance Tool to author them.
 
 ## Interactive web tools (no install — just open in browser)
 

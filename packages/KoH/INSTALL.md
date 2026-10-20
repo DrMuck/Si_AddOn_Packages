@@ -17,7 +17,7 @@ Copy the contents of this package on top of your Silica dedicated server directo
 
 ```
 Mods/Si_KingOfTheHill.dll
-UserData/KingOfTheHill_cfg/Si_KingOfTheHill_Config.example.json   (rename to *.json on first use)
+UserData/cfg/KingOfTheHill/Si_KingOfTheHill_Config.example.json   (rename to *.json on first use)
 UserData/sounds/*.wav                                              (intro / milestone / win cues)
 ```
 
@@ -25,7 +25,7 @@ On first server start the mod auto-creates the live config files. Edit them in p
 
 ## Map setup
 
-Capture-zone position, prefab, capture radius and exclusion radius live in MapBalance's per-map spawn JSON (`UserData/Spawns/<MapName>/koh_*.json`). KGT consumes that data through MapBalance's `OnSpecialsReady` event.
+Capture-zone position, prefab, capture radius and exclusion radius live in MapBalance's per-map spawn JSON (`UserData/cfg/Spawns/<MapName>/koh_*.json`). KGT consumes that data through MapBalance's `OnSpecialsReady` event.
 
 To **disable KGT on a single map**, ensure that map's spawn JSON has no `koh` block. `/koh off` disables the game everywhere (the `/buy` economy keeps running in Si_Buy).
 
@@ -45,4 +45,4 @@ To **set a per-map win threshold**, add an entry to `Cfg.WinThresholdPerMap` in 
 
 ## `/buy` economy
 
-Moved to the **Buy_Package** / [Si_Buy](https://github.com/DrMuck/Si_Buy) in KGT 0.5.0. If you upgrade from an older KoH package, keep `UserData/KingOfTheHill_cfg/`: Si_Buy seeds its own config from the economy fields found there on first start and copies `Bounties.json`.
+Moved to the **Buy_Package** / [Si_Buy](https://github.com/DrMuck/Si_Buy) in KGT 0.5.0. If you upgrade from an older KoH package, keep your KoH config folder (`UserData/cfg/KingOfTheHill/`, or the older `UserData/KingOfTheHill_cfg/`): Si_Buy seeds its own config from the economy fields found there on first start and copies `Bounties.json`.

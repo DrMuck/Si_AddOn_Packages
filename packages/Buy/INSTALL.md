@@ -14,11 +14,11 @@ Copy the contents of this package on top of your Silica dedicated server directo
 
 ```
 Mods/Si_Buy.dll
-UserData/Buy_cfg/Si_Buy_Config.example.json   (rename to *.json on first use, or let the mod write one)
-UserData/Buy_cfg/Bounties.example.json        (optional — rename + populate)
+UserData/cfg/Buy/Si_Buy_Config.example.json   (rename to *.json on first use, or let the mod write one)
+UserData/cfg/Buy/Bounties.example.json        (optional — rename + populate)
 ```
 
-Upgrading from a KoH package older than 0.5.0: keep your `UserData/KingOfTheHill_cfg/` folder. On the first start Si_Buy seeds its config from the economy fields there (same names) and copies `Bounties.json`. Then update `Si_KingOfTheHill.dll` from the KoH package too, or the old DLL will keep its own `/buy`.
+Upgrading from a KoH package older than 0.5.0: keep your KoH config folder (`UserData/cfg/KingOfTheHill/`, or the older `UserData/KingOfTheHill_cfg/`). On the first start Si_Buy seeds its config from the economy fields there (same names) and copies `Bounties.json`. Then update `Si_KingOfTheHill.dll` from the KoH package too, or the old DLL will keep its own `/buy`.
 
 ## Quick start
 

@@ -55,18 +55,18 @@ def build_balance(zf):
     zf.write(dll("Si_UnitBalanceUI", "Si_UnitBalance"), "Mods/Si_UnitBalance.dll")
     zf.write(dll("Si_MapBalance", "Si_MapBalance"), "Mods/Si_MapBalance.dll")
     zf.write(dll("Si_StarterUnits", "Si_StarterUnits"), "Mods/Si_StarterUnits.dll")
-    empty_dir(zf, "UserData/MapBalance_cfg/")
-    empty_dir(zf, "UserData/UnitBalance_cfg/")
+    empty_dir(zf, "UserData/cfg/Spawns/")
+    empty_dir(zf, "UserData/cfg/UnitBalance/")
     for f in sorted((ASSETS / "StarterUnits").glob("*.example.json")):
-        zf.write(f, f"UserData/StarterUnits/{f.name}")
+        zf.write(f, f"UserData/cfg/StarterUnits/{f.name}")
     zf.write(DOCS / "Balance" / "INSTALL.md", "INSTALL.md")
 
 
 def build_superweapon(zf):
     zf.write(dll("Si_CrabCannon", "Si_CrabCannon"), "Mods/Si_CrabCannon.dll")
     zf.write(dll("Si_HeavyTeleporter", "Si_HeavyTeleporter"), "Mods/Si_HeavyTeleporter.dll")
-    empty_dir(zf, "UserData/CrabCannon_cfg/")
-    empty_dir(zf, "UserData/HeavyTeleporter_cfg/")
+    empty_dir(zf, "UserData/cfg/CrabCannon/")
+    empty_dir(zf, "UserData/cfg/HeavyTeleporter/")
     zf.write(ASSETS / "sounds" / "cannon_boom.wav", "UserData/sounds/cannon_boom.wav")
     zf.write(DOCS / "SuperWeapon" / "INSTALL.md", "INSTALL.md")
 
@@ -75,7 +75,7 @@ def build_koh(zf):
     koh = PROJECTS / "Si_KingOfTheHill"
     zf.write(dll("Si_KingOfTheHill", "Si_KingOfTheHill"), "Mods/Si_KingOfTheHill.dll")
     zf.write(koh / "Si_KingOfTheHill_Config.example.json",
-             "UserData/KingOfTheHill_cfg/Si_KingOfTheHill_Config.example.json")
+             "UserData/cfg/KingOfTheHill/Si_KingOfTheHill_Config.example.json")
     for f in sorted((ASSETS / "sounds").glob("*.wav")):
         zf.write(f, f"UserData/sounds/{f.name}")
     for m in ("ADMIN_MANUAL", "PLAYER_MANUAL"):
@@ -88,8 +88,8 @@ def build_buy(zf):
     # The /buy credit economy, carved out of Si_KingOfTheHill in KGT 0.5.0.
     buy = PROJECTS / "Si_Buy"
     zf.write(dll("Si_Buy", "Si_Buy"), "Mods/Si_Buy.dll")
-    zf.write(buy / "Si_Buy_Config.example.json", "UserData/Buy_cfg/Si_Buy_Config.example.json")
-    zf.write(ASSETS / "KingOfTheHill_cfg" / "Bounties.example.json", "UserData/Buy_cfg/Bounties.example.json")
+    zf.write(buy / "Si_Buy_Config.example.json", "UserData/cfg/Buy/Si_Buy_Config.example.json")
+    zf.write(ASSETS / "KingOfTheHill_cfg" / "Bounties.example.json", "UserData/cfg/Buy/Bounties.example.json")
     zf.write(DOCS / "Buy" / "INSTALL.md", "INSTALL.md")
 
 
