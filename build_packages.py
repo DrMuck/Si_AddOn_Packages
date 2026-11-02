@@ -6,8 +6,12 @@ Release DLL is taken from its bin/Release/netstandard2.1 folder, so build the
 mods first. Static assets (sounds, example configs) and the INSTALL docs live
 in this repo under assets/ and packages/. Output goes to dist/.
 
-    python build_packages.py            # build all five
+    python build_packages.py            # build all
     python build_packages.py Replay     # build one
+
+ReplayUpdate builds Replay_Update.zip: the same Mod MapReplay payload plus the
+in-place updater (packages/Replay/Update_MapReplay.*) that keeps a server's
+live_config.py and other local files.
 """
 import os
 import subprocess
@@ -104,20 +108,33 @@ def build_replay(zf):
     zf.write(DOCS / "Replay" / "INSTALL.md", "INSTALL.md")
 
 
+def build_replay_update(zf):
+    """In-place updater for an existing Mod MapReplay install (keeps settings)."""
+    mr = PROJECTS / "Silica-MapReplay"
+    folder(zf, tracked_files(mr), mr, "payload/Mod MapReplay",
+           skip=(".gitattributes", ".gitignore", "test_full_render.py", "test_srpl_render.py"))
+    zf.write(dll("SilicaReplayLogging", "Si_ReplayLogging"), "payload/Mods/Si_ReplayLogging.dll")
+    for name in ("Update_MapReplay.bat", "Update_MapReplay.ps1", "UPDATE.md"):
+        zf.write(DOCS / "Replay" / name, name)
+
+
 PACKAGES = {
     "Balance": build_balance,
     "SuperWeapon": build_superweapon,
     "KoH": build_koh,
     "Buy": build_buy,
     "Replay": build_replay,
+    "ReplayUpdate": build_replay_update,
 }
+
+OUT_NAMES = {"ReplayUpdate": "Replay_Update.zip"}
 
 
 def main(argv):
     names = argv or list(PACKAGES)
     DIST.mkdir(exist_ok=True)
     for name in names:
-        out = DIST / f"{name}_Package.zip"
+        out = DIST / OUT_NAMES.get(name, f"{name}_Package.zip")
         with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
             PACKAGES[name](zf)
             n = len(zf.namelist())
