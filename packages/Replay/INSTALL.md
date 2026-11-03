@@ -34,7 +34,7 @@ TickIntervalSeconds = 1.0      # position sampling rate; 0.2 for very smooth rep
 LogAIvsAIUnitKills = true      # record kills where neither side is a player
 ```
 
-> The DLL is built against Silica Beta 0.9.47. A stale `SilicaCore.dll` on the server fails only at runtime, so check the MelonLoader log after a game update.
+> The DLL is built against the Silica 0.9.47 assemblies and runs unchanged on Release 1.0.x. A stale `SilicaCore.dll` on the server fails only at runtime, so check the MelonLoader log after a game update.
 
 ---
 

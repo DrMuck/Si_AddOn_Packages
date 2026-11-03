@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
-"""Build the five Si_AddOn_Packages release ZIPs from the sibling mod repos.
+"""Build the Si_AddOn_Packages release ZIPs from the sibling mod repos.
 
 Run from a checkout that sits next to the mod repos (see PROJECTS). Each mod's
-Release DLL is taken from its bin/Release/netstandard2.1 folder, so build the
-mods first. Static assets (sounds, example configs) and the INSTALL docs live
-in this repo under assets/ and packages/. Output goes to dist/.
+Release DLL is the TEST-branch build (Silica Release 1.0.x, the branch that
+becomes the public release), so build the mods first:
+
+    dotnet build -c Release -p:SilicaBranch=test
+
+Repos with a SilicaBranch switch put the test build into
+bin/Release/netstandard2.1 (Si_Market: bin/Release/test) and the 0.9.47
+default-branch build into bin/Release/default. Repos without the switch
+(Si_MapBalance, Si_StarterUnits, Si_ReplayLogging) build once against the
+0.9.47 assemblies and run unchanged on 1.0.x. The Si_ModUI client is an
+Il2Cpp build against the game client (Client/bin/Release/net6.0).
+Static assets (sounds, example configs) and the INSTALL docs live in this
+repo under assets/ and packages/. Output goes to dist/.
 
     python build_packages.py            # build all
     python build_packages.py Replay     # build one
@@ -26,10 +36,13 @@ ASSETS = HERE / "assets"
 DOCS = HERE / "packages"
 
 SERVER_LIB = "bin/Release/netstandard2.1"
+# Repos whose test build lands somewhere else than SERVER_LIB.
+TEST_LIB = {"Si_Market": "bin/Release/test"}
 
 
-def dll(repo: str, name: str) -> Path:
-    p = PROJECTS / repo / name / SERVER_LIB / f"{name}.dll"
+def dll(repo: str, name: str, sub: str | None = None) -> Path:
+    """The test-branch Release DLL of a mod; `sub` overrides the project folder."""
+    p = PROJECTS / repo / (sub or name) / TEST_LIB.get(repo, SERVER_LIB) / f"{name}.dll"
     if not p.is_file():
         sys.exit(f"missing DLL (build the mod first): {p}")
     return p
@@ -97,6 +110,28 @@ def build_buy(zf):
     zf.write(DOCS / "Buy" / "INSTALL.md", "INSTALL.md")
 
 
+def build_market(zf):
+    # Per-round faction coins traded with Si_Buy credits (needs Si_Buy 1.4.0+).
+    zf.write(dll("Si_Market", "Si_Market"), "Mods/Si_Market.dll")
+    zf.write(ASSETS / "Market" / "Si_Market_Config.example.json",
+             "UserData/cfg/Market/Si_Market_Config.example.json")
+    zf.write(DOCS / "Market" / "INSTALL.md", "INSTALL.md")
+
+
+def build_modui(zf):
+    # Server companion (Mods/) plus the player's client mod (game Mods/ folder).
+    ui = PROJECTS / "Si_ModUI"
+    zf.write(dll("Si_ModUI", "Si_ModUI_Server", sub="Server"), "Mods/Si_ModUI_Server.dll")
+    empty_dir(zf, "UserData/cfg/ModUI/")
+    client = ui / "Client" / "bin" / "Release" / "net6.0" / "Si_ModUI.dll"
+    if not client.is_file():
+        sys.exit(f"missing client DLL (dotnet build -c Release in Si_ModUI/Client): {client}")
+    zf.write(client, "Client/Mods/Si_ModUI.dll")
+    zf.write(ui / "docs" / "manual" / "Silica_ModMenu_Client_Install_Guide.pdf",
+             "Client/Silica_ModMenu_Client_Install_Guide.pdf")
+    zf.write(DOCS / "ModUI" / "INSTALL.md", "INSTALL.md")
+
+
 def build_replay(zf):
     zf.write(dll("SilicaReplayLogging", "Si_ReplayLogging"), "Mods/Si_ReplayLogging.dll")
     # The complete MapReplay tool, laid out exactly as it runs on the server:
@@ -123,6 +158,8 @@ PACKAGES = {
     "SuperWeapon": build_superweapon,
     "KoH": build_koh,
     "Buy": build_buy,
+    "Market": build_market,
+    "ModUI": build_modui,
     "Replay": build_replay,
     "ReplayUpdate": build_replay_update,
 }

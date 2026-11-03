@@ -1,0 +1,21 @@
+{
+  "Enabled": true,
+  "StartPrice": 10.0,
+  "SharesOutstanding": 100000.0,
+  "FreeFloat": 5000.0,
+  "DemandPremium": 0.5,
+  "TradeFee": 0.03,
+  "MinTradeCredits": 10,
+  "ArmyWeight": 1.0,
+  "StructureWeight": 1.0,
+  "BankWeight": 0.5,
+  "SampleSeconds": 10.0,
+  "SmoothingSeconds": 60.0,
+  "MarketGrowth": 0.5,
+  "ListingDelaySeconds": 20.0,
+  "AutoSellDefault": true,
+  "PriceAnnouncementSeconds": 240.0,
+  "AnnounceTrades": true,
+  "TopTradersAtRoundEnd": 3,
+  "Debug": false
+}

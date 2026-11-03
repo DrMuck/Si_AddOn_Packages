@@ -7,6 +7,7 @@
 1. [MelonLoader](https://github.com/LavaGang/MelonLoader) on the dedicated server
 2. [Silica Admin Mod](https://github.com/data-bomb/Silica) (`Si_AdminMod.dll`)
 3. Recommended: **Balance_Package** from the same release — `Si_UnitBalance.dll` makes `/buy` prices and kill rewards follow the modded costs
+4. Optional: **Market_Package** from the same release — `Si_Market.dll` lets players trade faction coins with their credits (needs this Si_Buy 1.4.0+)
 
 ## Install
 
